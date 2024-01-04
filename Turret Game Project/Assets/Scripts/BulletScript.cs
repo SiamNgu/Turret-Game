@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public GunProfileScriptableObject profile;
+    [HideInInspector] public GunProfileScriptableObject profile;
 
-    [SerializeField] private LayerMask targetMask;
     private void Start()
     {
         Destroy(gameObject, GameManager.BULLET_LIFE_TIME);
@@ -15,8 +14,7 @@ public class BulletScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit " + other.name);
-        other.GetComponent<PlayerBase>()?.InflictDamage(profile.damage);
+        GameManager.Instance.DealDamage(other.GetComponent<PlayerBase>(), profile.damage);
         Destroy(gameObject);
     }
 

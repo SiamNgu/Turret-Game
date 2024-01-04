@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerBase : MonoBehaviour
+public abstract class PlayerBase : MonoBehaviour
 {
     [SerializeField] protected GunProfileScriptableObject profile;
 
@@ -8,40 +8,27 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
+    public abstract GameManager.PlayerType playerType { get; set; }
+
     public float gunHeat { get; private set; } = 0f;
     protected bool right = true;
-    public float health { get; private set; }
+    public float health;
 
-    protected PlayerControls playerControls;
-    
-
-    protected virtual void Awake()
-    {        
-        playerControls = new PlayerControls();
-        health = GameManager.MAX_PLAYER_HEAlTH;
-    }
-
-
-    public void InflictDamage(float damage)
+    protected virtual void Start()
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        health = GameManager.MAX_PLAYER_HEAlTH;
     }
 
     private void Update()
     {
-        Rotate();
+        Orbit();
         gunHeat -= Time.deltaTime * profile.cooldownSpeed;
         gunHeat = Mathf.Max(gunHeat, 0);
     }
 
-    protected virtual void Rotate()
+    protected virtual void Orbit()
     {
         transform.Rotate(Vector3.forward, Time.deltaTime * profile.mobility * (right ? 1 : -1));
-
     }
 
     protected void Shoot()
@@ -54,14 +41,5 @@ public class PlayerBase : MonoBehaviour
             bullet.GetComponent<BulletScript>().profile = profile;
             gunHeat += profile.heatupSpeed;
         }
-    }
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-    private void OnDisable()
-    {
-        playerControls.Disable();
     }
 }

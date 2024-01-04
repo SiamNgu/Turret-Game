@@ -1,8 +1,9 @@
 public class PlayerTurret : PlayerBase
 {
-    protected override void Awake()
+    public override GameManager.PlayerType playerType { get { return GameManager.PlayerType.Defender; } set { } }
+    protected override void Start()
     {
-        base.Awake();
-        playerControls.Turret.Shoot.performed += ctx => Shoot();
+        base.Start();
+        GameManager.Instance.inputMaster._1V1.Defender.performed += ctx => Shoot();
     }
 }

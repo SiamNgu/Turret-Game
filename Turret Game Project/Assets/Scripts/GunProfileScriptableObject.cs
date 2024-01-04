@@ -10,7 +10,7 @@ public class GunProfileScriptableObject : ScriptableObject
     public float cooldownSpeed = 20f;
     public float heatupSpeed = 20f;
 
-    public float damage = 30;
+    public int damage = 30;
 
     public float speed = 50;
 }
