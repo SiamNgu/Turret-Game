@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848689817497769972, guid: 42943669ea5676b4a89d6fda14c8700e, type: 3}
       propertyPath: sceneToLoad
-      value: SpaceScene
+      value: Space Scene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

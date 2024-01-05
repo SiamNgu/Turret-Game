@@ -8,8 +8,6 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
-    public abstract GameManager.PlayerType playerType { get; set; }
-
     public float gunHeat { get; private set; } = 0f;
     protected bool right = true;
     public float health;

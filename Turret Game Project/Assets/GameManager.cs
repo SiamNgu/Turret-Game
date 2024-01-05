@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,10 +71,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        inputMaster.Enable();
-    }
     private void OnDisable()
     {
         inputMaster.Disable();
@@ -88,6 +85,9 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         inputMaster = new InputMaster();
+        Resume();
+        inputMaster.Pause.Resume.performed += ctx => Resume();
+        inputMaster._1V1.Pause.performed += ctx => Pause();
     }
     private void Update()
     {
@@ -96,16 +96,42 @@ public class GameManager : MonoBehaviour
             case GameState.InGame:
                 defenderData.DisplayData();
                 invaderData.DisplayData();
-                MySetActiveUI();
                 break;
             case GameState.PostGame:
-                MySetActiveUI();
-                inputMaster._1V1.Disable();
                 break;
             case GameState.Paused:
-                MySetActiveUI();
                 break;
         }
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        gameState = GameState.Paused;
+        MySetActiveUI();
+        SwitchActionMap(inputMaster.Pause);
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        gameState = GameState.InGame;
+        MySetActiveUI();
+        SwitchActionMap(inputMaster._1V1);
+    }
+
+    private void EndGame()
+    {
+        gameState = GameState.PostGame;
+        MySetActiveUI();
+        SwitchActionMap(inputMaster.PostGame);
+    }
+
+    private void SwitchActionMap(InputActionMap actionMap)
+    {
+        if (actionMap.enabled) { return; }
+        Debug.Log("switch action map: " + actionMap.name);
+        inputMaster.Disable();
+        actionMap.Enable();
     }
 
     private void MySetActiveUI()
@@ -124,7 +150,7 @@ public class GameManager : MonoBehaviour
         if (player.health <= 0)
         {
             Destroy(player);
-            gameState = GameState.PostGame;
+            EndGame();
         }
     }
 }

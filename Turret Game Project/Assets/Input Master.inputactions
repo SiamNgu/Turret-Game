@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "c7b2f28b-eb43-45d0-b040-49e9b2221622",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -44,6 +53,73 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Defender",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8adf4031-3562-4ba2-9ae9-152dda5ba372",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "4f1da02b-bce7-4b7c-9de8-3b8ed6a13a21",
+            "actions": [
+                {
+                    "name": "Resume",
+                    "type": "Button",
+                    "id": "32f18ea2-5126-4dbb-ac59-7637db847357",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e25da184-f252-4712-84ba-a6b7a7f11cc2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Post Game",
+            "id": "6c18699a-4f15-429c-b969-b5c5e830f437",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "d3dd7dc9-1cfc-4d56-a23c-a26c71687a66",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b63013ea-6a5b-4918-8d5b-14dff70f8ebd",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

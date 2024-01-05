@@ -44,6 +44,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7b2f28b-eb43-45d0-b040-49e9b2221622"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +75,73 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Defender"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8adf4031-3562-4ba2-9ae9-152dda5ba372"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Pause"",
+            ""id"": ""4f1da02b-bce7-4b7c-9de8-3b8ed6a13a21"",
+            ""actions"": [
+                {
+                    ""name"": ""Resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""32f18ea2-5126-4dbb-ac59-7637db847357"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e25da184-f252-4712-84ba-a6b7a7f11cc2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Post Game"",
+            ""id"": ""6c18699a-4f15-429c-b969-b5c5e830f437"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3dd7dc9-1cfc-4d56-a23c-a26c71687a66"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b63013ea-6a5b-4918-8d5b-14dff70f8ebd"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -95,6 +171,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m__1V1 = asset.FindActionMap("1V1", throwIfNotFound: true);
         m__1V1_Defender = m__1V1.FindAction("Defender", throwIfNotFound: true);
         m__1V1_Invader = m__1V1.FindAction("Invader", throwIfNotFound: true);
+        m__1V1_Pause = m__1V1.FindAction("Pause", throwIfNotFound: true);
+        // Pause
+        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+        m_Pause_Resume = m_Pause.FindAction("Resume", throwIfNotFound: true);
+        // Post Game
+        m_PostGame = asset.FindActionMap("Post Game", throwIfNotFound: true);
+        m_PostGame_Continue = m_PostGame.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -158,12 +241,14 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private List<I_1V1Actions> m__1V1ActionsCallbackInterfaces = new List<I_1V1Actions>();
     private readonly InputAction m__1V1_Defender;
     private readonly InputAction m__1V1_Invader;
+    private readonly InputAction m__1V1_Pause;
     public struct _1V1Actions
     {
         private @InputMaster m_Wrapper;
         public _1V1Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Defender => m_Wrapper.m__1V1_Defender;
         public InputAction @Invader => m_Wrapper.m__1V1_Invader;
+        public InputAction @Pause => m_Wrapper.m__1V1_Pause;
         public InputActionMap Get() { return m_Wrapper.m__1V1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -179,6 +264,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Invader.started += instance.OnInvader;
             @Invader.performed += instance.OnInvader;
             @Invader.canceled += instance.OnInvader;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(I_1V1Actions instance)
@@ -189,6 +277,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Invader.started -= instance.OnInvader;
             @Invader.performed -= instance.OnInvader;
             @Invader.canceled -= instance.OnInvader;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(I_1V1Actions instance)
@@ -206,6 +297,98 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         }
     }
     public _1V1Actions @_1V1 => new _1V1Actions(this);
+
+    // Pause
+    private readonly InputActionMap m_Pause;
+    private List<IPauseActions> m_PauseActionsCallbackInterfaces = new List<IPauseActions>();
+    private readonly InputAction m_Pause_Resume;
+    public struct PauseActions
+    {
+        private @InputMaster m_Wrapper;
+        public PauseActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_Pause_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PauseActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseActionsCallbackInterfaces.Add(instance);
+            @Resume.started += instance.OnResume;
+            @Resume.performed += instance.OnResume;
+            @Resume.canceled += instance.OnResume;
+        }
+
+        private void UnregisterCallbacks(IPauseActions instance)
+        {
+            @Resume.started -= instance.OnResume;
+            @Resume.performed -= instance.OnResume;
+            @Resume.canceled -= instance.OnResume;
+        }
+
+        public void RemoveCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPauseActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PauseActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PauseActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PauseActions @Pause => new PauseActions(this);
+
+    // Post Game
+    private readonly InputActionMap m_PostGame;
+    private List<IPostGameActions> m_PostGameActionsCallbackInterfaces = new List<IPostGameActions>();
+    private readonly InputAction m_PostGame_Continue;
+    public struct PostGameActions
+    {
+        private @InputMaster m_Wrapper;
+        public PostGameActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_PostGame_Continue;
+        public InputActionMap Get() { return m_Wrapper.m_PostGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PostGameActions set) { return set.Get(); }
+        public void AddCallbacks(IPostGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PostGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PostGameActionsCallbackInterfaces.Add(instance);
+            @Continue.started += instance.OnContinue;
+            @Continue.performed += instance.OnContinue;
+            @Continue.canceled += instance.OnContinue;
+        }
+
+        private void UnregisterCallbacks(IPostGameActions instance)
+        {
+            @Continue.started -= instance.OnContinue;
+            @Continue.performed -= instance.OnContinue;
+            @Continue.canceled -= instance.OnContinue;
+        }
+
+        public void RemoveCallbacks(IPostGameActions instance)
+        {
+            if (m_Wrapper.m_PostGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPostGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PostGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PostGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PostGameActions @PostGame => new PostGameActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -219,5 +402,14 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         void OnDefender(InputAction.CallbackContext context);
         void OnInvader(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IPauseActions
+    {
+        void OnResume(InputAction.CallbackContext context);
+    }
+    public interface IPostGameActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
     }
 }

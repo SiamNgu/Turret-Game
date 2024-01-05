@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerEnemy : PlayerBase
 {
-    public override GameManager.PlayerType playerType { get { return GameManager.PlayerType.Invader; } set { } }
-
     protected override void Start()
     {
         base.Start();
