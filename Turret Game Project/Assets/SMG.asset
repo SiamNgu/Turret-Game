@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobility: 200
   cooldownSpeed: 30
-  heatupSpeed: 15
-  damage: 10
+  heatupSpeed: 10
+  damage: 20
   speed: 10

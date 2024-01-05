@@ -129,7 +129,6 @@ public class GameManager : MonoBehaviour
     private void SwitchActionMap(InputActionMap actionMap)
     {
         if (actionMap.enabled) { return; }
-        Debug.Log("switch action map: " + actionMap.name);
         inputMaster.Disable();
         actionMap.Enable();
     }
