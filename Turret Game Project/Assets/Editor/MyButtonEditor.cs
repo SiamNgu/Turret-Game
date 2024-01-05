@@ -23,7 +23,6 @@ public class MyButtonScriptEditor : Editor
                 buttonScript.selectedSceneIndex = EditorGUILayout.Popup("Select Scene", buttonScript.selectedSceneIndex, sceneNames);
                 if (GUI.changed) buttonScript.sceneToLoad = sceneNames[buttonScript.selectedSceneIndex];
                 break;
-
             case MyButtonScript.ButtonAction.Quit:
                 break;
         }

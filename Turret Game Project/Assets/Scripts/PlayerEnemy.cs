@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerEnemy : PlayerBase
 {
+    public override GameManager.PlayerType playerType { get { return GameManager.PlayerType.Invader; } set { } }
     protected override void Start()
     {
         base.Start();
@@ -21,8 +22,8 @@ public class PlayerEnemy : PlayerBase
 
         float screenMaxWidth = screenMaxHeight * aspect;
 
-        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.01f) * screenMaxWidth;
-        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.01f) * screenMaxHeight;
+        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.01f) * screenMaxWidth * 0.9f;
+        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.01f) * screenMaxHeight * 0.9f;
 
         transform.position = new Vector2(x, y);// Calculate the angle of the enemy to point at the turret in the position (0; 0)
         float angle = Mathf.Atan2(-transform.position.y, -transform.position.x) * Mathf.Rad2Deg;

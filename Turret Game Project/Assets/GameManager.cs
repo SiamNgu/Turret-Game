@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public const int MAX_PLAYER_HEAlTH = 200;
     public const int MAX_GUN_HEAT = 100;
     public const float BULLET_LIFE_TIME = 4;
-    private static readonly Vector2 HEALTH_SLIDER_OFFSET = Vector2.up * .8f;
-    private static readonly Vector2 GUNHEAT_SLIDER_OFFSET = Vector2.up * 1f;
-    private static readonly Vector2 DAMAGE_TEXT_OFFSET = new Vector2(1f, .5f);
+    private static readonly Vector2 HEALTH_SLIDER_OFFSET = Vector2.up;
+    private static readonly Vector2 GUNHEAT_SLIDER_OFFSET = Vector2.right;
+    private static readonly Vector2 DAMAGE_TEXT_OFFSET = Vector2.one;
     #endregion
     public InputMaster inputMaster;
 
@@ -146,6 +146,19 @@ public class GameManager : MonoBehaviour
     {
         if (player==null) return;
         player.health -= damage;
+        switch (player.playerType)
+        {
+            case PlayerType.Defender:
+                defenderData.damageText.gameObject.SetActive(true);
+                defenderData.damageText.GetComponent<Animator>().SetTrigger("isDamage");
+                defenderData.damageText.text = damage.ToString();
+                break;
+            case PlayerType.Invader:
+                invaderData.damageText.gameObject.SetActive(true);
+                invaderData.damageText.GetComponent<Animator>().SetTrigger("isDamage");
+                invaderData.damageText.text = damage.ToString();
+                break;
+        }
         if (player.health <= 0)
         {
             Destroy(player);
