@@ -1,9 +1,18 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerTurret : PlayerBase
 {
-    public override GameManager.PlayerType playerType { get { return GameManager.PlayerType.Defender; } set { } }
-    protected override void Start()
+    protected override GameManager.PlayerUIReferences uiReferences { get; set; } 
+    void Start()
     {
-        base.Start();
+        uiReferences = GameManager.Instance.defenderUIReferences;
         GameManager.Instance.inputMaster._1V1.Defender.performed += ctx => Shoot();
+    }
+
+    protected override void Orbit()
+    {
+        transform.Rotate(Vector3.forward, Time.deltaTime * profile.mobility * (right ? 1 : -1));
     }
 }

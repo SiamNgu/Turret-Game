@@ -633,7 +633,6 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 64411517eccdc1f46893605ffddfd8ac, type: 2}
   shootPoint: {fileID: 61815419}
   bulletPrefab: {fileID: 2210655146417808422, guid: 360cad8d76726a74b8d82c9ee2fd8e07, type: 3}
-  health: 0
 --- !u!212 &448892498
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1193,7 +1192,6 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 46c844d61f502b841a4c82f514d4b544, type: 2}
   shootPoint: {fileID: 849752669}
   bulletPrefab: {fileID: 1114376298190604624, guid: 6696a7ac39d9be04bb3e4f062c585239, type: 3}
-  health: 0
 --- !u!58 &595780792
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1421,12 +1419,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  <defenderData>k__BackingField:
+  <defenderUIReferences>k__BackingField:
     playerScript: {fileID: 595780791}
     healthSlider: {fileID: 1891638087}
     gunHeatSlider: {fileID: 550025154}
     damageText: {fileID: 1393199200}
-  <invaderData>k__BackingField:
+  <invaderUIReferences>k__BackingField:
     playerScript: {fileID: 448892497}
     healthSlider: {fileID: 5636884359398287992}
     gunHeatSlider: {fileID: 635299626}
@@ -1486,7 +1484,7 @@ RectTransform:
   m_Father: {fileID: 2093193042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2239,7 +2237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1661884691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2463,7 +2461,7 @@ RectTransform:
   m_Father: {fileID: 1580399582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2711,7 +2709,7 @@ RectTransform:
   m_Father: {fileID: 732915541}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3135,7 +3133,7 @@ RectTransform:
   m_Father: {fileID: 1064889460651667706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

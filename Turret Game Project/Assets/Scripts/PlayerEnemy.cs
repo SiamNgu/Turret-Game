@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerEnemy : PlayerBase
 {
-    public override GameManager.PlayerType playerType { get { return GameManager.PlayerType.Invader; } set { } }
-    protected override void Start()
+    protected override GameManager.PlayerUIReferences uiReferences { get; set; }
+    void Start()
     {
-        base.Start();
+        uiReferences = GameManager.Instance.invaderUIReferences;
         GameManager.Instance.inputMaster._1V1.Invader.performed += ctx => Shoot();
     }
 
@@ -22,8 +24,8 @@ public class PlayerEnemy : PlayerBase
 
         float screenMaxWidth = screenMaxHeight * aspect;
 
-        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.01f) * screenMaxWidth * 0.9f;
-        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.01f) * screenMaxHeight * 0.9f;
+        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.01f) * screenMaxWidth * 0.8f;
+        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.01f) * screenMaxHeight * 0.8f;
 
         transform.position = new Vector2(x, y);// Calculate the angle of the enemy to point at the turret in the position (0; 0)
         float angle = Mathf.Atan2(-transform.position.y, -transform.position.x) * Mathf.Rad2Deg;

@@ -14,22 +14,14 @@ public class GameManager : MonoBehaviour
     private static readonly Vector2 DAMAGE_TEXT_OFFSET = Vector2.one;
     #endregion
     public InputMaster inputMaster;
-
     public static GameManager Instance { get; private set; }
-
     public GameState gameState = GameState.InGame;
-
     public Event disableEvent;
-
-    [field:SerializeField] 
-    public PlayerData defenderData { get; private set; }
-    [field: SerializeField]
-    public PlayerData invaderData { get; private set; }
-
+    [field:SerializeField] public PlayerUIReferences defenderUIReferences { get; private set; }
+    [field: SerializeField] public PlayerUIReferences invaderUIReferences { get; private set; }
     [SerializeField] private GameStateUI[] gameStateUI;
-
-    [System.Serializable]
-    public struct GameStateUI
+    #region Struct and Enums
+    [System.Serializable] public struct GameStateUI
     {
         public GameObject ui;
         public GameState linkedState;
@@ -45,9 +37,7 @@ public class GameManager : MonoBehaviour
         Invader, 
         Defender
     }
-
-    [System.Serializable]
-    public struct PlayerData
+    [System.Serializable] public struct PlayerUIReferences
     {
         public PlayerBase playerScript;
         //data display component refereces
@@ -55,13 +45,11 @@ public class GameManager : MonoBehaviour
         public Slider gunHeatSlider;
         public TMP_Text damageText;
 
-        public void DisplayData()
+        public void UpdatePos()
         {
             UpdateUIPos(gunHeatSlider.transform, GUNHEAT_SLIDER_OFFSET);
             UpdateUIPos(healthSlider.transform, HEALTH_SLIDER_OFFSET);
             UpdateUIPos(damageText.transform, DAMAGE_TEXT_OFFSET);
-            healthSlider.value = (float)playerScript.health / MAX_PLAYER_HEAlTH;
-            gunHeatSlider.value = (float)playerScript.gunHeat / MAX_GUN_HEAT;
         }
 
         private void UpdateUIPos(Transform uiElement, Vector2 offset)
@@ -70,7 +58,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    #endregion
     private void OnDisable()
     {
         inputMaster.Disable();
@@ -94,8 +82,8 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.InGame:
-                defenderData.DisplayData();
-                invaderData.DisplayData();
+                defenderUIReferences.UpdatePos();
+                invaderUIReferences.UpdatePos();
                 break;
             case GameState.PostGame:
                 break;
@@ -142,26 +130,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DealDamage(PlayerBase player, int damage)
+    public void DealDamage(PlayerBase otherPlayer, int damage)
     {
-        if (player==null) return;
-        player.health -= damage;
-        switch (player.playerType)
+        if (otherPlayer==null) return;
+        otherPlayer.Health -= damage;
+
+        if (otherPlayer.Health <= 0)
         {
-            case PlayerType.Defender:
-                defenderData.damageText.gameObject.SetActive(true);
-                defenderData.damageText.GetComponent<Animator>().SetTrigger("isDamage");
-                defenderData.damageText.text = damage.ToString();
-                break;
-            case PlayerType.Invader:
-                invaderData.damageText.gameObject.SetActive(true);
-                invaderData.damageText.GetComponent<Animator>().SetTrigger("isDamage");
-                invaderData.damageText.text = damage.ToString();
-                break;
-        }
-        if (player.health <= 0)
-        {
-            Destroy(player);
+            Destroy(otherPlayer);
             EndGame();
         }
     }

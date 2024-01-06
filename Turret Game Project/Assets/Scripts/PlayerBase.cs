@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviour
 {
@@ -8,38 +10,60 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
-    public abstract GameManager.PlayerType playerType { get; set; }
+    protected abstract GameManager.PlayerUIReferences uiReferences { get; set; }
 
-    public float gunHeat { get; private set; } = 0f;
     protected bool right = true;
-    public float health;
 
-    protected virtual void Start()
+    private float _gunHeat = 0;
+    public float GunHeat 
+    { 
+        get { return _gunHeat; }
+        private set 
+        {
+            OnGunHeatChange();
+            _gunHeat = value; 
+        }
+    }
+    private float _health = GameManager.MAX_PLAYER_HEAlTH;
+    public float Health
     {
-        health = GameManager.MAX_PLAYER_HEAlTH;
+        get { return _health; }
+        set
+        {
+            OnHealthChange(Mathf.Abs(value - _health));
+            _health = value;
+        }
     }
 
     private void Update()
     {
         Orbit();
-        gunHeat -= Time.deltaTime * profile.cooldownSpeed;
-        gunHeat = Mathf.Max(gunHeat, 0);
+        GunHeat = Mathf.Abs(GunHeat - Time.deltaTime * profile.cooldownSpeed);
     }
 
-    protected virtual void Orbit()
+    protected abstract void Orbit();
+
+    private void OnHealthChange(float damage)
     {
-        transform.Rotate(Vector3.forward, Time.deltaTime * profile.mobility * (right ? 1 : -1));
+        uiReferences.damageText.GetComponent<Animator>().SetTrigger("isDamage");
+        uiReferences.damageText.text = damage.ToString();
+        uiReferences.healthSlider.value = (float)Health / GameManager.MAX_PLAYER_HEAlTH;
+    }
+
+    private void OnGunHeatChange()
+    {
+        uiReferences.gunHeatSlider.value = (float)GunHeat / GameManager.MAX_GUN_HEAT;
     }
 
     protected void Shoot()
     {
         right = !right;
 
-        if (gunHeat <= GameManager.MAX_GUN_HEAT - 5)
+        if (GunHeat <= GameManager.MAX_GUN_HEAT - 5)
         {
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             bullet.GetComponent<BulletScript>().profile = profile;
-            gunHeat += profile.heatupSpeed;
+            GunHeat += profile.heatupSpeed;
         }
     }
 }
