@@ -13,29 +13,15 @@ public class GameManager : MonoBehaviour
     private static readonly Vector2 GUNHEAT_SLIDER_OFFSET = Vector2.right;
     private static readonly Vector2 DAMAGE_TEXT_OFFSET = Vector2.one;
     #endregion
-    public InputMaster inputMaster;
-    public static GameManager Instance { get; private set; }
-    public GameState gameState = GameState.InGame;
-    public Event disableEvent;
+    #region References
     [field:SerializeField] public PlayerUIReferences defenderUIReferences { get; private set; }
     [field: SerializeField] public PlayerUIReferences invaderUIReferences { get; private set; }
-    [SerializeField] private GameStateUI[] gameStateUI;
+    #endregion
     #region Struct and Enums
     [System.Serializable] public struct GameStateUI
     {
         public GameObject ui;
-        public GameState linkedState;
-    }
-    public enum GameState
-    {
-        InGame,
-        PostGame,
-        Paused
-    }
-    public enum PlayerType
-    {
-        Invader, 
-        Defender
+        public GameStateEnum linkedState;
     }
     [System.Serializable] public struct PlayerUIReferences
     {
@@ -58,62 +44,72 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    public enum GameStateEnum
+    {
+        InGame,
+        PostGame,
+        Paused
+    }
+    public enum PlayerType
+    {
+        Invader,
+        Defender
+    }
     #endregion
+    public InputMaster inputMaster;
+    public static GameManager Instance { get; private set; }
+    public GameStateEnum gameState { get; private set; }
+
+    public event GameStateEventHandler EnterInGameEvent;
+    public event EndGameEventHandler EnterPostGameEvent;
+    public event GameStateEventHandler EnterPausedEvent;
+
+    public delegate void GameStateEventHandler();
+    public delegate void EndGameEventHandler(string loser);
+
     private void OnDisable()
     {
         inputMaster.Disable();
     }
-
+    
     private void Awake()
     {
+        //Singleton initialization
         if (Instance != null && Instance != this)
         {
             Destroy(this);
             return;
         }
         Instance = this;
+
+        /*Input action intitalization*/
         inputMaster = new InputMaster();
-        Resume();
-        inputMaster.Pause.Resume.performed += ctx => Resume();
-        inputMaster._1V1.Pause.performed += ctx => Pause();
+
+        //Subscribing input events
+        inputMaster.Pause.Resume.performed += ctx => TriggerSwitchState(GameStateEnum.InGame);
+        inputMaster._1V1.Pause.performed += ctx => TriggerSwitchState(GameStateEnum.Paused);
     }
+
+    private void Start()
+    {
+        /*Game state initialization*/
+        TriggerSwitchState(GameStateEnum.InGame);
+    }
+
     private void Update()
     {
         switch (gameState)
         {
-            case GameState.InGame:
+            case GameStateEnum.InGame:
                 defenderUIReferences.UpdatePos();
                 invaderUIReferences.UpdatePos();
                 break;
-            case GameState.PostGame:
+            case GameStateEnum.PostGame:
                 break;
-            case GameState.Paused:
+            case GameStateEnum.Paused:
                 break;
         }
     }
-    public void Pause()
-    {
-        Time.timeScale = 0;
-        gameState = GameState.Paused;
-        MySetActiveUI();
-        SwitchActionMap(inputMaster.Pause);
-    }
-
-    public void Resume()
-    {
-        Time.timeScale = 1;
-        gameState = GameState.InGame;
-        MySetActiveUI();
-        SwitchActionMap(inputMaster._1V1);
-    }
-
-    private void EndGame()
-    {
-        gameState = GameState.PostGame;
-        MySetActiveUI();
-        SwitchActionMap(inputMaster.PostGame);
-    }
-
     private void SwitchActionMap(InputActionMap actionMap)
     {
         if (actionMap.enabled) { return; }
@@ -121,24 +117,23 @@ public class GameManager : MonoBehaviour
         actionMap.Enable();
     }
 
-    private void MySetActiveUI()
+    public void TriggerSwitchState(GameStateEnum newState, string loser = null)
     {
-        for (int i = 0; i < gameStateUI.Length; i++)
+        gameState = newState;
+        switch (newState)
         {
-            if (gameStateUI[i].linkedState == gameState) gameStateUI[i].ui.SetActive(true);
-            else gameStateUI[i].ui.SetActive(false);
-        }
-    }
-
-    public void DealDamage(PlayerBase otherPlayer, int damage)
-    {
-        if (otherPlayer==null) return;
-        otherPlayer.Health -= damage;
-
-        if (otherPlayer.Health <= 0)
-        {
-            Destroy(otherPlayer);
-            EndGame();
+            case GameStateEnum.PostGame:
+                EnterPostGameEvent?.Invoke(loser);
+                SwitchActionMap(inputMaster.PostGame);
+                break;
+            case GameStateEnum.Paused:
+                EnterPausedEvent?.Invoke();
+                SwitchActionMap(inputMaster.Pause);
+                break;
+            case GameStateEnum.InGame:
+                EnterInGameEvent?.Invoke();
+                SwitchActionMap(inputMaster._1V1);
+                break;
         }
     }
 }

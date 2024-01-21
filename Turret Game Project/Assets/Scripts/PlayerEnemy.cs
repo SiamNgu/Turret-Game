@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class PlayerEnemy : PlayerBase
 {
+    protected override string other { get; set; } = "Defender";
     protected override GameManager.PlayerUIReferences uiReferences { get; set; }
     void Start()
     {
@@ -24,8 +23,8 @@ public class PlayerEnemy : PlayerBase
 
         float screenMaxWidth = screenMaxHeight * aspect;
 
-        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.01f) * screenMaxWidth * 0.8f;
-        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.01f) * screenMaxHeight * 0.8f;
+        float x = Mathf.Sin(currentRotationTimer * profile.mobility * 0.02f) * screenMaxWidth * 0.8f;
+        float y = Mathf.Cos(currentRotationTimer * profile.mobility * 0.02f) * screenMaxHeight * 0.8f;
 
         transform.position = new Vector2(x, y);// Calculate the angle of the enemy to point at the turret in the position (0; 0)
         float angle = Mathf.Atan2(-transform.position.y, -transform.position.x) * Mathf.Rad2Deg;

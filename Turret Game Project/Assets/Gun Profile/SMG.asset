@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92c106d7d54b7044b194386e633b590, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  mobility: 200
+  mobility: 250
   cooldownSpeed: 30
   heatupSpeed: 10
   damage: 20

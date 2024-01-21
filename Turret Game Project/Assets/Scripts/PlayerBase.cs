@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class PlayerBase : MonoBehaviour
 {
@@ -12,8 +10,8 @@ public abstract class PlayerBase : MonoBehaviour
 
     protected abstract GameManager.PlayerUIReferences uiReferences { get; set; }
 
+    #region Player in game data
     protected bool right = true;
-
     private float _gunHeat = 0;
     public float GunHeat 
     { 
@@ -30,20 +28,29 @@ public abstract class PlayerBase : MonoBehaviour
         get { return _health; }
         set
         {
-            OnHealthChange(Mathf.Abs(value - _health));
+            UpdateHealthUi(value - _health);
             _health = value;
+            if (_health <= 0)
+            {
+                Destroy(gameObject);
+                GameManager.Instance.TriggerSwitchState(GameManager.GameStateEnum.PostGame, other);
+            }
         }
     }
-
+    protected float shootSlowdown = 1;
+    #endregion
+    protected abstract string other { get; set; }
     private void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.GameStateEnum.InGame) return;
         Orbit();
-        GunHeat = Mathf.Abs(GunHeat - Time.deltaTime * profile.cooldownSpeed);
+        shootSlowdown = Mathf.MoveTowards(shootSlowdown, 1, 0.008f);
+        GunHeat = Mathf.Abs(GunHeat - (Time.deltaTime * profile.cooldownSpeed * shootSlowdown));
     }
 
     protected abstract void Orbit();
 
-    private void OnHealthChange(float damage)
+    private void UpdateHealthUi(float damage)
     {
         uiReferences.damageText.GetComponent<Animator>().SetTrigger("isDamage");
         uiReferences.damageText.text = damage.ToString();
@@ -58,12 +65,12 @@ public abstract class PlayerBase : MonoBehaviour
     protected void Shoot()
     {
         right = !right;
-
-        if (GunHeat <= GameManager.MAX_GUN_HEAT - 5)
+        if (GunHeat <= GameManager.MAX_GUN_HEAT-1)
         {
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             bullet.GetComponent<BulletScript>().profile = profile;
             GunHeat += profile.heatupSpeed;
+            shootSlowdown = 0;
         }
     }
 }
