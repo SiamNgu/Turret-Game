@@ -3,10 +3,8 @@ using UnityEngine;
 public class PlayerEnemy : PlayerBase
 {
     protected override string other { get; set; } = "Defender";
-    protected override GameManager.PlayerUIReferences uiReferences { get; set; }
     void Start()
     {
-        uiReferences = GameManager.Instance.invaderUIReferences;
         GameManager.Instance.inputMaster._1V1.Invader.performed += ctx => Shoot();
     }
 

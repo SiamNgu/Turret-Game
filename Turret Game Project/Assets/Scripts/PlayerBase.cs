@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class PlayerBase : MonoBehaviour
@@ -8,8 +9,6 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
-    protected abstract GameManager.PlayerUIReferences uiReferences { get; set; }
-
     #region Player in game data
     protected bool right = true;
     private float _gunHeat = 0;
@@ -18,7 +17,7 @@ public abstract class PlayerBase : MonoBehaviour
         get { return _gunHeat; }
         private set 
         {
-            OnGunHeatChange();
+            GunHeatChangeEvent.Invoke();
             _gunHeat = value; 
         }
     }
@@ -28,7 +27,7 @@ public abstract class PlayerBase : MonoBehaviour
         get { return _health; }
         set
         {
-            UpdateHealthUi(value - _health);
+            HealthChangeEvent?.Invoke(value - _health);
             _health = value;
             if (_health <= 0)
             {
@@ -40,6 +39,12 @@ public abstract class PlayerBase : MonoBehaviour
     protected float shootSlowdown = 1;
     #endregion
     protected abstract string other { get; set; }
+
+    public delegate void OnHealthChangeHandler(float difference);
+    public event OnHealthChangeHandler HealthChangeEvent;
+
+    public Action GunHeatChangeEvent;
+
     private void Update()
     {
         if (GameManager.Instance.gameState != GameManager.GameStateEnum.InGame) return;
@@ -49,19 +54,6 @@ public abstract class PlayerBase : MonoBehaviour
     }
 
     protected abstract void Orbit();
-
-    private void UpdateHealthUi(float damage)
-    {
-        uiReferences.damageText.GetComponent<Animator>().SetTrigger("isDamage");
-        uiReferences.damageText.text = damage.ToString();
-        uiReferences.healthSlider.value = (float)Health / GameManager.MAX_PLAYER_HEAlTH;
-    }
-
-    private void OnGunHeatChange()
-    {
-        uiReferences.gunHeatSlider.value = (float)GunHeat / GameManager.MAX_GUN_HEAT;
-    }
-
     protected void Shoot()
     {
         right = !right;

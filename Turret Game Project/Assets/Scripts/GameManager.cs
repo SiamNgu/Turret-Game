@@ -8,52 +8,13 @@ public class GameManager : MonoBehaviour
     #region constant values
     public const int MAX_PLAYER_HEAlTH = 200;
     public const int MAX_GUN_HEAT = 100;
-    public const float BULLET_LIFE_TIME = 4;
-    private static readonly Vector2 HEALTH_SLIDER_OFFSET = Vector2.up;
-    private static readonly Vector2 GUNHEAT_SLIDER_OFFSET = Vector2.right;
-    private static readonly Vector2 DAMAGE_TEXT_OFFSET = Vector2.one;
-    #endregion
-    #region References
-    [field:SerializeField] public PlayerUIReferences defenderUIReferences { get; private set; }
-    [field: SerializeField] public PlayerUIReferences invaderUIReferences { get; private set; }
     #endregion
     #region Struct and Enums
-    [System.Serializable] public struct GameStateUI
-    {
-        public GameObject ui;
-        public GameStateEnum linkedState;
-    }
-    [System.Serializable] public struct PlayerUIReferences
-    {
-        public PlayerBase playerScript;
-        //data display component refereces
-        public Slider healthSlider;
-        public Slider gunHeatSlider;
-        public TMP_Text damageText;
-
-        public void UpdatePos()
-        {
-            UpdateUIPos(gunHeatSlider.transform, GUNHEAT_SLIDER_OFFSET);
-            UpdateUIPos(healthSlider.transform, HEALTH_SLIDER_OFFSET);
-            UpdateUIPos(damageText.transform, DAMAGE_TEXT_OFFSET);
-        }
-
-        private void UpdateUIPos(Transform uiElement, Vector2 offset)
-        {
-            uiElement.transform.position = Camera.main.WorldToScreenPoint((Vector2)playerScript.transform.position + offset);
-        }
-
-    }
     public enum GameStateEnum
     {
         InGame,
         PostGame,
         Paused
-    }
-    public enum PlayerType
-    {
-        Invader,
-        Defender
     }
     #endregion
     public InputMaster inputMaster;
@@ -94,21 +55,6 @@ public class GameManager : MonoBehaviour
     {
         /*Game state initialization*/
         TriggerSwitchState(GameStateEnum.InGame);
-    }
-
-    private void Update()
-    {
-        switch (gameState)
-        {
-            case GameStateEnum.InGame:
-                defenderUIReferences.UpdatePos();
-                invaderUIReferences.UpdatePos();
-                break;
-            case GameStateEnum.PostGame:
-                break;
-            case GameStateEnum.Paused:
-                break;
-        }
     }
     private void SwitchActionMap(InputActionMap actionMap)
     {
