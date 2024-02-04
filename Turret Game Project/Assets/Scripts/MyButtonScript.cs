@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,10 +8,13 @@ public class MyButtonScript : MonoBehaviour
     public ButtonAction clickAction;
     [HideInInspector] public int selectedSceneIndex;
     [HideInInspector] public string sceneToLoad;
+    [HideInInspector] public GameObject panel;
     public enum ButtonAction
     {
         LoadScene,
-        Quit
+        Quit,
+        TogglePanel,
+        None
     }
 
     private void Awake()
@@ -30,6 +32,10 @@ public class MyButtonScript : MonoBehaviour
             case ButtonAction.Quit:
                 Application.Quit();
                 break;
+            case ButtonAction.TogglePanel:
+                panel.SetActive(!panel.activeSelf);
+                break;
+            case ButtonAction.None: break;
         }
     }
 }

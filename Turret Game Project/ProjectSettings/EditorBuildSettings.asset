@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Space Scene.unity
     guid: 5a98423c1bb7b9d408d5ba4511a82e32
-  - enabled: 1
-    path: Assets/Scenes/Settings.unity
-    guid: e69e1023f62bb8f43ad0cbaf7dc6c3f3
   m_configObjects: {}

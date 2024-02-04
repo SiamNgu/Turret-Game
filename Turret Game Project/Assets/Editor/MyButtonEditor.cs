@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-
+    
 [CustomEditor(typeof(MyButtonScript))]
 public class MyButtonScriptEditor : Editor
 {
@@ -19,13 +19,17 @@ public class MyButtonScriptEditor : Editor
         switch (buttonScript.clickAction)
         {
             case MyButtonScript.ButtonAction.LoadScene:
-                if (buttonScript.clickAction == MyButtonScript.ButtonAction.Quit) { return; }
                 buttonScript.selectedSceneIndex = EditorGUILayout.Popup("Select Scene", buttonScript.selectedSceneIndex, sceneNames);
                 if (GUI.changed) buttonScript.sceneToLoad = sceneNames[buttonScript.selectedSceneIndex];
+                break;
+            case MyButtonScript.ButtonAction.TogglePanel:
+                SerializedProperty panelProp = serializedObject.FindProperty("panel");
+                EditorGUILayout.PropertyField(panelProp, true);
                 break;
             case MyButtonScript.ButtonAction.Quit:
                 break;
         }
+        serializedObject.ApplyModifiedProperties();
     }
 
     private void RefreshSceneNames()
