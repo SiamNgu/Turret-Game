@@ -11,7 +11,10 @@ public class BulletScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.GetComponent<PlayerBase>().Health -= profile.damage;
+        if (other.GetComponent<PlayerBase>() != null)
+        {
+            other.GetComponent<PlayerBase>().Health -= profile.damage;
+        }
         Destroy(gameObject);
     }
 
