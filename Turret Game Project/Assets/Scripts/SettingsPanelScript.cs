@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
+using System;
+using System.Reflection;
 
 public class SettingsPanelScript : MonoBehaviour
 {
@@ -12,17 +15,19 @@ public class SettingsPanelScript : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
 
+    [SerializeField] private ResolutionData resolutionData;
+
     private void Awake()
     {
         //Sync settings ui with player prefs
         audioSlider.value = Mathf.Pow(10, PlayerPrefs.GetFloat("Master Volume") / 20);
-        fullScreenToggle.isOn = PlayerPrefs.GetInt("Full Screen") == 1;
+        fullScreenToggle.isOn = resolutionData.fullScreen;
         #region Sync resolution dropdown ui
         resolutionDropdown.ClearOptions();
         var dropdownOptions = Screen.resolutions.Select(resolution => $"{resolution.width} x {resolution.height}").Distinct().ToList();
-        resolutionDropdown.AddOptions(dropdownOptions);
+        resolutionDropdown.AddOptions(resolutionData.resolutions.Select(element => new TMP_Dropdown.OptionData(element.width + "x" + element.height)).ToList());
 
-        resolutionDropdown.value = PlayerPrefs.GetInt("Screen Resolution");
+        resolutionDropdown.value = resolutionData.resolutionIndex;
         #endregion
     }
     public void OnChangeAudioLevel(float value)
@@ -32,11 +37,16 @@ public class SettingsPanelScript : MonoBehaviour
     }
     public void OnChangeFullScreen(bool value)
     {
-        PlayerPrefs.SetInt("Full Screen", value ? 1 : 0);
-        Screen.fullScreen = value;
+        resolutionData.fullScreen =value;
+        Screen.fullScreen = resolutionData.fullScreen;
     }
     public void OnChangeResolution(int selectedIndex)
     {
-        Screen.SetResolution(Screen.resolutions[selectedIndex].width, Screen.resolutions[selectedIndex].height, Screen.fullScreen);
+        resolutionData.resolutionIndex = selectedIndex;
+        Screen.SetResolution(
+            resolutionData.resolutions[resolutionData.resolutionIndex].width,
+            resolutionData.resolutions[resolutionData.resolutionIndex].height,
+            Screen.fullScreen
+            );
     }
 }
