@@ -33,7 +33,6 @@ public class SettingsPanelScript : MonoBehaviour
     public void OnChangeFullScreen(bool value)
     {
         PlayerPrefs.SetInt("Full Screen", value ? 1 : 0);
-        Debug.Log("Change full screen to" + value);
         Screen.fullScreen = value;
     }
     public void OnChangeResolution(int selectedIndex)
