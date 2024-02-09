@@ -5,8 +5,14 @@ public class PlayerTurret : PlayerBase
     protected override string other { get; set; } = "Invader";
     void Start()
     {
-        GameManager.Instance.inputMaster._1V1.Defender.performed += ctx => Shoot();
+        #if UNITY_ANDROID || UNITY_IOS
+            GameManager.Instance.inputMaster._1V1.Defender.performed += ctx => TouchscreenShoot(ctx.ReadValue<float>());
+        #else
+            GameManager.Instance.inputMaster._1V1.Defender.performed += ctx => Shoot();
+        #endif
+
     }
+    
 
     protected override void Orbit()
     {

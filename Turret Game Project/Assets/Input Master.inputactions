@@ -7,21 +7,21 @@
             "actions": [
                 {
                     "name": "Defender",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d6bada41-0cb6-46cb-bc46-7cb002376f61",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Invader",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "9d43b086-d0d0-49ff-8d1c-a2f7a5475fb1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Pause",
@@ -47,8 +47,41 @@
                 },
                 {
                     "name": "",
-                    "id": "ef7a0041-c33f-4fd6-a297-a2709d68d615",
-                    "path": "<Touchscreen>/Press",
+                    "id": "3bf34c4c-37a6-4cd0-9756-768b9021b820",
+                    "path": "<Touchscreen>/touch0/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Invader",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7d5279d-9c30-46b3-9656-1c0ac6a0b2a5",
+                    "path": "<Touchscreen>/touch1/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Invader",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f20c2ebe-5fef-402e-814e-a57ee9a04ba5",
+                    "path": "<Touchscreen>/touch2/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Invader",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f937786d-d7c6-4873-9437-1774a4ff2d4b",
+                    "path": "<Touchscreen>/touch3/position/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touchscreen",
@@ -69,8 +102,19 @@
                 },
                 {
                     "name": "",
-                    "id": "ae231011-f0cb-4cba-a244-dbccb2b5cd27",
-                    "path": "<Touchscreen>/Press",
+                    "id": "8adf4031-3562-4ba2-9ae9-152dda5ba372",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12c2c228-23a4-4fb9-8d22-42256b8dc900",
+                    "path": "<Touchscreen>/touch0/position/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touchscreen",
@@ -80,12 +124,34 @@
                 },
                 {
                     "name": "",
-                    "id": "8adf4031-3562-4ba2-9ae9-152dda5ba372",
-                    "path": "<Keyboard>/escape",
+                    "id": "c3b7d1b1-cd30-4485-99d5-6b85771b28ab",
+                    "path": "<Touchscreen>/touch1/position/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Pause",
+                    "groups": "Touchscreen",
+                    "action": "Defender",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec7a3abe-5d54-4dd0-9fbc-8500b08fb5fe",
+                    "path": "<Touchscreen>/touch2/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Defender",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9ba271a-599b-4bc8-be2c-2c0eee060c7f",
+                    "path": "<Touchscreen>/touch3/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Defender",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

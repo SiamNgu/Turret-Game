@@ -9,6 +9,17 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
+
+    #if UNITY_ANDROID
+        protected void TouchscreenShoot(float x)
+        {
+            if (x / Screen.width < 0.5f)
+            {
+                Shoot();
+            }
+        }
+    #endif
+
     #region Player in game data
     protected bool right = true;
     private float _gunHeat = 0;

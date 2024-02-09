@@ -3,9 +3,15 @@ using UnityEngine;
 public class PlayerEnemy : PlayerBase
 {
     protected override string other { get; set; } = "Defender";
+
     void Start()
     {
-        GameManager.Instance.inputMaster._1V1.Invader.performed += ctx => Shoot();
+        #if UNITY_ANDROID || UNITY_IOS
+            GameManager.Instance.inputMaster._1V1.Invader.performed += ctx => TouchscreenShoot(ctx.ReadValue<float>());
+        #else
+            GameManager.Instance.inputMaster._1V1.Invader.performed += ctx => Shoot();
+        #endif
+
     }
 
     float currentRotationTimer = 0;

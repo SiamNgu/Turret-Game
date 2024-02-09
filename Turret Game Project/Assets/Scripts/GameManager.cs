@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public delegate void GameStateEventHandler();
     public delegate void EndGameEventHandler(string loser);
 
+    public int screen_width = Screen.width;
+
     private void OnDisable()
     {
         inputMaster.Disable();
