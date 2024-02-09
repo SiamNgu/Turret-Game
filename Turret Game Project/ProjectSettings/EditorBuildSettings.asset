@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Space Scene.unity
     guid: 5a98423c1bb7b9d408d5ba4511a82e32
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1e7cf6e2bbae1d04fbbd3e5384a4024c, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 1afb27fc1dfbba54c99fd4d2643821db, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 93940e5e8cdead44b8da78073cb86dfb, type: 2}
