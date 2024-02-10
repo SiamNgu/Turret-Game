@@ -14,6 +14,16 @@ public class PlayerEnemy : PlayerBase
 
     }
 
+    #if UNITY_ANDROID
+        void TouchscreenShoot(float x)
+        {
+            if (x / Screen.width > 0.5f)
+            {
+                Shoot();
+            }
+        }
+    #endif
+
     float currentRotationTimer = 0;
     protected override void Orbit()
     {

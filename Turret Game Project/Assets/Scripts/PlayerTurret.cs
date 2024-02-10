@@ -12,7 +12,16 @@ public class PlayerTurret : PlayerBase
         #endif
 
     }
-    
+
+    #if UNITY_ANDROID
+        void TouchscreenShoot(float x)
+        {
+            if (x / Screen.width < 0.5f)
+            {
+                Shoot();
+            }
+        }
+    #endif
 
     protected override void Orbit()
     {
