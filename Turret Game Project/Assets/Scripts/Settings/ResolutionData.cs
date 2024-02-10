@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New Resolution Data", menuName = "Resolution Data")]
 public class ResolutionData
@@ -11,8 +12,4 @@ public class ResolutionData
         public int height;
     }
     public MyResolution[] resolutions;
-
-    public bool fullScreen = true;
-
-    public int resolutionIndex;
 }
