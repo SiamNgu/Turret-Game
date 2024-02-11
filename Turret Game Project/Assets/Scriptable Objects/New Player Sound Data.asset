@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c49280e9e3178408e06fc3f12dd8bf, type: 3}
+  m_Name: New Player Sound Data
+  m_EditorClassIdentifier: 
+  dieSound: {fileID: 8300000, guid: ecd552d19e07b7c4db99d30d57cd1f1c, type: 3}
+  shootSound: {fileID: 8300000, guid: 86b4610e49eb170408cbdb7287a1399a, type: 3}
+  hitSound: {fileID: 8300000, guid: 0ff9868a10b3e734888b29995dc71905, type: 3}

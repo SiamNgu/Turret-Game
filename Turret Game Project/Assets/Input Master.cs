@@ -114,7 +114,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""06434b29-5025-46b8-b35f-ce99492d4f82"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
