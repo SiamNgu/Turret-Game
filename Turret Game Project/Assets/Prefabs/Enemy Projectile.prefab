@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3745362623712037942}
   m_Layer: 8
   m_Name: Enemy Projectile
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!70 &-7224322219338137604
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

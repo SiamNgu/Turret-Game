@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioManager))]
 public class GameManager : MonoBehaviour
 {
     #region constant values
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void GameStateEventHandler();
     public delegate void EndGameEventHandler(string loser);
+    
+    //Reference to the audio manager
+    public AudioManager audioManager { get; private set; }
 
     private void OnDisable()
     {
@@ -49,6 +53,9 @@ public class GameManager : MonoBehaviour
         //Subscribing input events
         inputMaster.Pause.Resume.performed += ctx => TriggerSwitchState(GameStateEnum.InGame);
         inputMaster._1V1.Pause.performed += ctx => TriggerSwitchState(GameStateEnum.Paused);
+
+        //Accessing components
+        audioManager = GetComponent<AudioManager>();
     }
 
     private void Start()

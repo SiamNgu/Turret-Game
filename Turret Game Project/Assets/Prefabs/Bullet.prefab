@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8386555251711833996}
   m_Layer: 11
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 768
 --- !u!50 &-6751058500011581276
 Rigidbody2D:
   serializedVersion: 4
