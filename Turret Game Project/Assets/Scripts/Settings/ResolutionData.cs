@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Resolution Data", menuName = "Resolution Data")]
+[CreateAssetMenu(fileName = "New Resolution Data", menuName = "ScriptableObjects/Resolution Data")]
 public class ResolutionData
 
     : ScriptableObject
