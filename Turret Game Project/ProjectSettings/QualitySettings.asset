@@ -40,20 +40,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: 9b77e9e659cb5754793e2c59e55195eb, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Low
@@ -89,20 +76,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: f6f5d6d151c511644830973265084415, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Medium
@@ -138,20 +112,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: 53028b1d729cc4f469b39bad88c8a580, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: High
@@ -187,20 +148,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: c5ca39605b0128b41907629baf47165f, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Very High
@@ -236,20 +184,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: 19d1b1e7287c81047a1a8b3a2de096b6, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Ultra
@@ -266,7 +201,7 @@ QualitySettings:
     skinWeights: 255
     textureQuality: 0
     anisotropicTextures: 2
-    antiAliasing: 0
+    antiAliasing: 2
     softParticles: 1
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -285,20 +220,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-<<<<<<< Updated upstream
     customRenderPipeline: {fileID: 0}
-=======
-    customRenderPipeline: {fileID: 11400000, guid: 470c9f9a6203c6e4f97c7b23a56b0433, type: 2}
-    terrainQualityOverrides: 0
-    terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
->>>>>>> Stashed changes
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 2

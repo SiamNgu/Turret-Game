@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     #region constant values
     public const int MAX_PLAYER_HEAlTH = 200;
     public const int MAX_GUN_HEAT = 100;
-    public const float DEFENDER_SLOWDOWN_RECOVER_SPEED = 1.5f;
     #endregion
     #region Struct and Enums
     public enum GameStateEnum
