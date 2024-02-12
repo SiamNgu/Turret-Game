@@ -814,11 +814,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: NewTurretGame
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 80efddfea47cdb01
   metroApplicationDescription: New Turret Game
   wsaImages: {}
   metroTileShortName: New Turret Game
