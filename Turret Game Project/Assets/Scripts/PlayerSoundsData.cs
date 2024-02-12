@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player Sound Data", menuName = "Scriptable Object/Player Sound Data")]
+[CreateAssetMenu(fileName = "New Player Sound Data", menuName = "ScriptableObjects/Player Sound Data")]
 public class PlayerSoundsData : ScriptableObject
 {
     public AudioClip dieSound;
