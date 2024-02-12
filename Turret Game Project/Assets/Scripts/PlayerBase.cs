@@ -56,7 +56,7 @@ public abstract class PlayerBase : MonoBehaviour
     {
         if (GameManager.Instance.gameState != GameManager.GameStateEnum.InGame) return;
         Orbit();
-        shootSlowdown = Mathf.MoveTowards(shootSlowdown, 1, 0.008f);
+        shootSlowdown = Mathf.MoveTowards(shootSlowdown, 1, GameManager.DEFENDER_SLOWDOWN_RECOVER_SPEED * Time.deltaTime);
         GunHeat = Mathf.Abs(GunHeat - (Time.deltaTime * profile.cooldownSpeed * shootSlowdown));
     }
 
