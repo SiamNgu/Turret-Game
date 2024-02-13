@@ -13,5 +13,3 @@ MonoBehaviour:
   m_Name: New Resolution Data
   m_EditorClassIdentifier: 
   resolutions: []
-  fullScreen: 1
-  resolutionIndex: -1
