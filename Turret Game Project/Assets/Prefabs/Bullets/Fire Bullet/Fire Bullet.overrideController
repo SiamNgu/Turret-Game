@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fire Bullet
+  m_Controller: {fileID: 9100000, guid: d45510abbbd249549a80f0b9e395dd05, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d12dab4ae6f470d4caf461f8e05130e1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e0828936522af22418d407b14b2e63f3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9510ed4e144c73a43b114f359036eb43, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 85e5b7b002e6cda489f996e45642920e, type: 2}

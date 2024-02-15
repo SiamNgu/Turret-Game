@@ -183,6 +183,7 @@ MonoBehaviour:
   clickAction: 0
   selectedSceneIndex: 0
   sceneToLoad: Main Menu
+  panel: {fileID: 0}
 --- !u!95 &5707423166979188615
 Animator:
   serializedVersion: 5
