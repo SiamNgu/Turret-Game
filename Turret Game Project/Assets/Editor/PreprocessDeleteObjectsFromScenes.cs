@@ -7,10 +7,6 @@ using UnityEngine;
 public class PreprocessDeleteObjectsFromScenes : IPreprocessBuildWithReport
 {
     public int callbackOrder { get { return 0; } }
-    void DestroyAllObjectsBeforeBuildWithTag<T>()
-    {
-        
-    }
     public void OnPreprocessBuild(BuildReport report)
     {
         Debug.Log(report.summary.platform + " build.");
