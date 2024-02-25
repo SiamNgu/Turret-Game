@@ -4,6 +4,7 @@ public class PlayerEnemy : PlayerBase
 {
     protected override string other { get; set; } = "Defender";
 
+
     void Start()
     {
         #if UNITY_ANDROID || UNITY_IOS
@@ -14,7 +15,13 @@ public class PlayerEnemy : PlayerBase
 
     }
 
-    #if UNITY_ANDROID
+    protected override void Update()
+    {
+        base.Update();
+        shootPoint.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(Time.time * GameManager.INVADER_SHOOT_POINT_ROTATION_SPEED) * GameManager.INVADER_SHOOT_POINT_ROTATION_ANGLE);
+    }
+
+#if UNITY_ANDROID
         void TouchscreenShoot(float x)
         {
             if (x / Screen.width > 0.5f)
@@ -22,9 +29,10 @@ public class PlayerEnemy : PlayerBase
                 Shoot();
             }
         }
-    #endif
+#endif
 
     float currentRotationTimer = 0;
+
     protected override void Orbit()
     {
         int direction = (right ? 1 : -1);

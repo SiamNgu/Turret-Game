@@ -6,7 +6,7 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] protected GunProfileScriptableObject profile;
 
     [Header("Shoot reference")]
-    [SerializeField] private Transform shootPoint;
+    [SerializeField] protected Transform shootPoint;
     [SerializeField] private GameObject bulletPrefab;
 
     [SerializeField] private PlayerSoundsData soundsData; 
@@ -53,7 +53,7 @@ public abstract class PlayerBase : MonoBehaviour
         HealthChangeEvent += OnHealthChange;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (GameManager.Instance.gameState != GameManager.GameStateEnum.InGame) return;
         Orbit();

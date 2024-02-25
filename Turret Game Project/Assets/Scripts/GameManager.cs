@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     #region constant values
     public const int MAX_PLAYER_HEAlTH = 200;
     public const int MAX_GUN_HEAT = 100;
+    public const float INVADER_SHOOT_POINT_ROTATION_SPEED = 10f;
+    public const float INVADER_SHOOT_POINT_ROTATION_ANGLE = 26f;
+
     #endregion
     #region Struct and Enums
     public enum GameStateEnum

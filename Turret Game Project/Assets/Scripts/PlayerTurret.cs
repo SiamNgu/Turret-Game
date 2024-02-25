@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerTurret : PlayerBase
 {
     protected override string other { get; set; } = "Invader";
+    
     void Start()
     {
         #if UNITY_ANDROID || UNITY_IOS
@@ -13,7 +14,7 @@ public class PlayerTurret : PlayerBase
 
     }
 
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         void TouchscreenShoot(float x)
         {
             if (x / Screen.width < 0.5f)
@@ -21,7 +22,8 @@ public class PlayerTurret : PlayerBase
                 Shoot();
             }
         }
-    #endif
+#endif
+
 
     protected override void Orbit()
     {

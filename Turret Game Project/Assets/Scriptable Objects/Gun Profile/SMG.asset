@@ -15,5 +15,5 @@ MonoBehaviour:
   mobility: 250
   cooldownSpeed: 30
   heatupSpeed: 10
-  damage: 20
+  damage: 30
   speed: 10
